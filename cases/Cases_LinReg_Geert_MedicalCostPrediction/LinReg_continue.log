@@ -1,0 +1,236 @@
+File ingelezen: data/insurance.csv
+Check op duplicates na drop 
+0
+df.info : 
+None
+df.describe : 
+               age          bmi     children       charges
+count  1337.000000  1337.000000  1337.000000   1337.000000
+mean     39.222139    30.663452     1.095737  13279.121487
+std      14.044333     6.100468     1.205571  12110.359656
+min      18.000000    15.960000     0.000000   1121.873900
+25%      27.000000    26.290000     0.000000   4746.344000
+50%      39.000000    30.400000     1.000000   9386.161300
+75%      51.000000    34.700000     2.000000  16657.717450
+max      64.000000    53.130000     5.000000  63770.428010
+Check op nulwaarden 
+age         0
+sex         0
+bmi         0
+children    0
+smoker      0
+region      0
+charges     0
+dtype: int64
+Check van categorische features
+
+
+
+Regression models with polynomial features, no stratefy
+*************************************************************
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 4646    | 0.882533 | 30.7566 |
+|  1 | Lasso             | 4645.59 | 0.882553 | 30.7523 |
+|  2 | Ridge             | 4645.99 | 0.882533 | 30.7589 |
+|  3 | Random Forest     | 4823.86 | 0.873367 | 40.3143 |
+|  4 | Gradient Boosting | 4368.85 | 0.89613  | 31.2621 |
+|  5 | Decision Tree     | 7066.08 | 0.728284 | 51.1326 |
+|  6 | XGBRegressor      | 4266.56 | 0.900937 | 30.3298 |
++----+-------------------+---------+----------+---------+
+
+
+
+
+
+Regression models with polynomial features, met stratify
+*************************************************************
+
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000,50000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 4709.57 | 0.855186 | 29.5249 |
+|  1 | Lasso             | 4709.98 | 0.855161 | 29.5213 |
+|  2 | Ridge             | 4710.07 | 0.855155 | 29.5191 |
+|  3 | Random Forest     | 5060.7  | 0.832788 | 33.0115 |
+|  4 | Gradient Boosting | 4708.62 | 0.855245 | 30.9666 |
+|  5 | Decision Tree     | 7294.93 | 0.652552 | 44.5023 |
+|  6 | XGBRegressor      | 4567.2  | 0.863809 | 30.1895 |
++----+-------------------+---------+----------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, zonder stratify
+*************************************************************
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 4646    | 0.882533 | 30.7566 |
+|  1 | Lasso             | 4641.48 | 0.882761 | 30.7125 |
+|  2 | Ridge             | 4641.01 | 0.882785 | 30.9546 |
+|  3 | Random Forest     | 4661.28 | 0.881759 | 38.5411 |
+|  4 | Gradient Boosting | 4304.68 | 0.899158 | 32.8726 |
+|  5 | Decision Tree     | 6263.7  | 0.786489 | 45.3696 |
+|  6 | XGBRegressor      | 4268.8  | 0.900832 | 31.393  |
++----+-------------------+---------+----------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000,50000, np.inf
+Regression models polynomial features en stratify on charges_cat en met hyperparameter tuning
+
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 4709.57 | 0.855186 | 29.5249 |
+|  1 | Lasso             | 4708.93 | 0.855226 | 29.5385 |
+|  2 | Ridge             | 4710    | 0.85516  | 29.6224 |
+|  3 | Random Forest     | 4965.59 | 0.839013 | 31.0604 |
+|  4 | Gradient Boosting | 4566.94 | 0.863825 | 31.1937 |
+|  5 | Decision Tree     | 6738.59 | 0.703527 | 39.7547 |
+|  6 | XGBRegressor      | 4527.49 | 0.866167 | 29.8197 |
++----+-------------------+---------+----------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+Zonder outliers in BMI - Regression models with polynomial features, met stratefy
+
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 4717.83 | 0.854678 | 28.2881 |
+|  1 | Lasso             | 4716.46 | 0.854762 | 28.3429 |
+|  2 | Ridge             | 4716.53 | 0.854757 | 28.4781 |
+|  3 | Random Forest     | 4950.39 | 0.839997 | 33.136  |
+|  4 | Gradient Boosting | 4560.64 | 0.8642   | 31.2439 |
+|  5 | Decision Tree     | 6265.75 | 0.743673 | 33.6873 |
+|  6 | XGBRegressor      | 4545.03 | 0.865128 | 30.1281 |
++----+-------------------+---------+----------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+nExtra test: alle rokers verwijderd
+
+Regression models with polynomial features, met stratefy
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000, 50000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+-----------+---------+
+|    | model             |    RMSE |        R2 |    MAPE |
+|----+-------------------+---------+-----------+---------|
+|  0 | Linear Regression | 5184.84 |  0.271373 | 28.8606 |
+|  1 | Lasso             | 5182.98 |  0.271896 | 28.8636 |
+|  2 | Ridge             | 5183.01 |  0.271888 | 28.8529 |
+|  3 | Random Forest     | 5438.12 |  0.198449 | 29.543  |
+|  4 | Gradient Boosting | 5066.18 |  0.304343 | 34.8539 |
+|  5 | Decision Tree     | 6452.98 | -0.128639 | 30.1538 |
+|  6 | XGBRegressor      | 5199.26 |  0.267314 | 27.1006 |
++----+-------------------+---------+-----------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+Extra test: alle niet-rokers verwijderd
+
+Regression models with polynomial features, met stratify
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000, 50000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+----------+----------+
+|    | model             |    RMSE |       R2 |     MAPE |
+|----+-------------------+---------+----------+----------|
+|  0 | Linear Regression | 5136.65 | 0.810582 | 16.8176  |
+|  1 | Lasso             | 5129.01 | 0.811145 | 16.7803  |
+|  2 | Ridge             | 5068.86 | 0.815549 | 16.5008  |
+|  3 | Random Forest     | 4068.07 | 0.881194 |  8.71273 |
+|  4 | Gradient Boosting | 4461.22 | 0.857121 | 10.8685  |
+|  5 | Decision Tree     | 7096.85 | 0.638431 | 15.6342  |
+|  6 | XGBRegressor      | 3940.63 | 0.888521 |  9.08573 |
++----+-------------------+---------+----------+----------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+Extra test: alle rokers verwijderd en enkel BMI als feature
+
+Regression models with polynomial features, met stratify
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000, 50000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+-------------+---------+
+|    | model             |    RMSE |          R2 |    MAPE |
+|----+-------------------+---------+-------------+---------|
+|  0 | Linear Regression | 6080.07 | -0.00196084 | 81.6201 |
+|  1 | Lasso             | 6080.07 | -0.00196078 | 81.6201 |
+|  2 | Ridge             | 6080.05 | -0.00195545 | 81.623  |
+|  3 | Random Forest     | 6503.98 | -0.146547   | 81.0515 |
+|  4 | Gradient Boosting | 6084.91 | -0.00355641 | 81.1227 |
+|  5 | Decision Tree     | 7045.72 | -0.345505   | 89.7948 |
+|  6 | XGBRegressor      | 6234.46 | -0.0534946  | 73.7119 |
++----+-------------------+---------+-------------+---------+
+
+
+
+Regression models with polynomial features en hyperparameter tuning, met stratify
+*****************************************************************************************
+
+Extra test: enkel rokers en enkel BMI als feature
+
+Regression models with polynomial features, met stratify
+Stratify on charges_cat: extra feature engineering: charges omzetten naar categories : bins=[0, 20000, 30000, 50000, np.inf
+Regression models polynomial features en stratify on charges_cat
+
+
++----+-------------------+---------+----------+---------+
+|    | model             |    RMSE |       R2 |    MAPE |
+|----+-------------------+---------+----------+---------|
+|  0 | Linear Regression | 5263.95 | 0.801077 | 16.2717 |
+|  1 | Lasso             | 5263.95 | 0.801078 | 16.2717 |
+|  2 | Ridge             | 5261.39 | 0.801271 | 16.2508 |
+|  3 | Random Forest     | 6887.12 | 0.659485 | 21.7188 |
+|  4 | Gradient Boosting | 6625.47 | 0.684867 | 21.0558 |
+|  5 | Decision Tree     | 8440.36 | 0.488575 | 25.9626 |
+|  6 | XGBRegressor      | 6131.04 | 0.730146 | 18.731  |
++----+-------------------+---------+----------+---------+
+
+
+
+De beste resultaten van de testen
+*******************************
+
+
++-------+------------------------------+------------------------------+------------------------------+
+|       | RMSE                         | R2                           | MAPE                         |
+|-------+------------------------------+------------------------------+------------------------------|
+| value | 3940.6314988546405           | 0.9009365199291076           | 8.71272898207955             |
+| model | Strat_Hyper_Outliers_Smokers | NoStrat_NoHyper_Outliers_All | Strat_Hyper_Outliers_Smokers |
+| type  | Decision Tree                | XGBRegressor                 | Linear Regression            |
++-------+------------------------------+------------------------------+------------------------------+

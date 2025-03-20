@@ -1,0 +1,43 @@
+READ ME
+Dit is de readme file bij een aanpassing door Francisca van de notebook:
+"wine beginner-friendly-logistic-regression-model" 
+die gebruik maakt van de dataset "wine_data" van Kaggle:
+'/kaggle/input/wine-quality-dataset-balanced-classification/wine_data.csv'
+
+Data
+De dataset telt 21000 rijen en 12 kolommen, met gegevens over de samenstelling van de wijn en als label
+de kwaliteit van de wijn, die is gegeven in de range van 3 t/m 9 (alleen gehele getallen).
+In de (bestaande) notebook wordt logistic regression gebruikt om te voorspellen of de wijn een kwaliteit 
+heeft van 7 of hoger. Het model heeft een accuracy van 0.714 en voorspelt bijna altijd dat de kwaliteit 
+slecht is. Het is daarom niet een heel goed model.
+
+Analyse Data
+Het blijkt dat er geen correlatie is tussen de parameters (features) en de kwaliteit van de wijn.
+Voor lage kwaliteit (3 en 4) zijn de waardes gelijk aan die voor hoge kwaliteit (8 en 9). 
+Ik heb geconcludeerd dat op basis van deze parameters alleen middelmatige wijn kan worden onderscheiden
+van de goede of slechte wijn. Dat heb ik daarom gedaan.
+
+Preprocessing
+- Data opsplitsen in trainingsset en testset. De trainingsset heb ik verder opgesplitst in 
+een validatieset en trainingsset, omdat de verschillende modellen geoptimaliseerd worden en daarna getest 
+met de validatieset.
+- De pH waarden zijn skewed naar rechts en worden daarom omgezet in de logwaarden.
+- Alle features zijn gestandaardiseerd (gemiddelde = nul, std = 1)
+- Bijna alle features zijn bimodaal, maar dat zou voor logistic regression niet uit moeten maken.
+
+Logistic regression model
+Een LogisticRegression model wordt getrained op de trainingsdata en levert een accuracy op van 0.8512 
+en een f1-score van 0.7987 op de validatieset. 
+Een GridSearch levert geen verbetering op en geeft een optimale C-waarde van 0.01, wat aangeeft
+dat restrictie niet tot verbetering leidt.
+
+Andere modellen
+Om te kijken of andere modellen een beter resultaat geven worden de volgende modellen getest:
+RandomForestClassifier
+KNeighborsClassifier
+DecisionTreeClassifier
+XGBClassifier
+Met Optuna worden de beste parameters gezocht. 
+RandomForestClassifier en KNeighborsClassifier geven de beste resultaten, deze zijn beter dan 
+LogisticRegression.
+Deze modellen halen beide een accuracy van O.88 en een f1-score van 0.85 op de test-set.

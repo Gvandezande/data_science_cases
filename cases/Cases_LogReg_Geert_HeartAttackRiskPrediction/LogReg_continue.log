@@ -1,0 +1,343 @@
+File ingelezen: data/heart_attack_risk_dataset.csv
+
+Describe van de dataset
++-------------------------+---------+-----------+-----------+-------+--------+--------+--------+-------+
+|                         |   count |      mean |       std |   min |    25% |    50% |    75% |   max |
+|-------------------------+---------+-----------+-----------+-------+--------+--------+--------+-------|
+| Age                     |   50000 |  53.3987  | 20.799    |    18 |  35    |  53    |  71    |    89 |
+| Smoking                 |   50000 |   0.29842 |  0.457569 |     0 |   0    |   0    |   1    |     1 |
+| Alcohol_Consumption     |   50000 |   0.40198 |  0.490303 |     0 |   0    |   0    |   1    |     1 |
+| BMI                     |   50000 |  27.5194  |  7.22518  |    15 |  21.27 |  27.54 |  33.77 |    40 |
+| Diabetes                |   50000 |   0.19884 |  0.399131 |     0 |   0    |   0    |   0    |     1 |
+| Hypertension            |   50000 |   0.29738 |  0.45711  |     0 |   0    |   0    |   1    |     1 |
+| Cholesterol_Level       |   50000 | 225.036   | 43.3174   |   150 | 187.3  | 225.1  | 262.6  |   300 |
+| Resting_BP              |   50000 | 134.434   | 25.908    |    90 | 112    | 134    | 157    |   179 |
+| Heart_Rate              |   50000 |  94.5305  | 20.1871   |    60 |  77    |  94    | 112    |   129 |
+| Family_History          |   50000 |   0.30034 |  0.45841  |     0 |   0    |   0    |   1    |     1 |
+| Fasting_Blood_Sugar     |   50000 |   0.14936 |  0.356447 |     0 |   0    |   0    |   0    |     1 |
+| Exercise_Induced_Angina |   50000 |   0.20164 |  0.401229 |     0 |   0    |   0    |   0    |     1 |
+| Max_Heart_Rate_Achieved |   50000 | 149.305   | 28.8237   |   100 | 124    | 149    | 174    |   199 |
++-------------------------+---------+-----------+-----------+-------+--------+--------+--------+-------+
+
+Check op nulwaarden: 
+Age                        0
+Gender                     0
+Smoking                    0
+Alcohol_Consumption        0
+Physical_Activity_Level    0
+BMI                        0
+Diabetes                   0
+Hypertension               0
+Cholesterol_Level          0
+Resting_BP                 0
+Heart_Rate                 0
+Family_History             0
+Stress_Level               0
+Chest_Pain_Type            0
+Thalassemia                0
+Fasting_Blood_Sugar        0
+ECG_Results                0
+Exercise_Induced_Angina    0
+Max_Heart_Rate_Achieved    0
+Heart_Attack_Risk          0
+dtype: int64
+
+Check op duplicates: 
+0
+
+
+
+Eenvoudige logistic regression met stratify op de target value zonder SMOTE
+**************************************************************
+Voorkomens in y_pred: Counter({'Low': 10000})
+Voorkomens in y_test: Counter({'Low': 5005, 'Moderate': 2981, 'High': 2014})
+
+accuracy_score: 50.05
+classification_report:               precision    recall  f1-score   support
+
+        High       0.00      0.00      0.00         0
+         Low       1.00      0.50      0.67     10000
+    Moderate       0.00      0.00      0.00         0
+
+    accuracy                           0.50     10000
+   macro avg       0.33      0.17      0.22     10000
+weighted avg       1.00      0.50      0.67     10000
+
+Confusion matrix: +------+------+------+
+|    0 |    1 |    2 |
+|------+------+------|
+|    0 |    0 |    0 |
+| 2014 | 5005 | 2981 |
+|    0 |    0 |    0 |
++------+------+------+
+
+
+
+Eenvoudige logistic regression met stratify op de target value en class weight = balanced
+******************************************************************************************
+Voorkomens in y_pred: Counter({'High': 3534, 'Moderate': 3358, 'Low': 3108})
+Voorkomens in y_test: Counter({'Low': 5005, 'Moderate': 2981, 'High': 2014})
+
+accuracy_score: 32.629999999999995
+classification_report:               precision    recall  f1-score   support
+
+        High       0.36      0.21      0.26      3534
+         Low       0.30      0.49      0.37      3108
+    Moderate       0.34      0.30      0.32      3358
+
+    accuracy                           0.33     10000
+   macro avg       0.34      0.33      0.32     10000
+weighted avg       0.34      0.33      0.32     10000
+
+Confusion matrix: +-----+------+------+
+|   0 |    1 |    2 |
+|-----+------+------|
+| 734 | 1777 | 1023 |
+| 641 | 1519 |  948 |
+| 639 | 1709 | 1010 |
++-----+------+------+
+
+
+
+Eenvoudige logistic regression met SMOTE en met stratify op de target value
+********************************************************************
+Voorkomens in y_pred: Counter({'High': 3596, 'Low': 3377, 'Moderate': 3027})
+Voorkomens in y_test: Counter({'Low': 5005, 'Moderate': 2981, 'High': 2014})
+
+accuracy_score: 33.739999999999995
+classification_report:               precision    recall  f1-score   support
+
+        High       0.21      0.37      0.26      2014
+         Low       0.50      0.34      0.41      5005
+    Moderate       0.31      0.31      0.31      2981
+
+    accuracy                           0.34     10000
+   macro avg       0.34      0.34      0.33     10000
+weighted avg       0.39      0.34      0.35     10000
+
+Confusion matrix: +------+------+------+
+|    0 |    1 |    2 |
+|------+------+------|
+|  742 |  679 |  593 |
+| 1795 | 1704 | 1506 |
+| 1059 |  994 |  928 |
++------+------+------+
+
+
+Executing classification for Model : Random Forest
+
+
+Executing classification for Model : Ada Boost
+
+
+Executing classification for Model : Gradient Boosting
+
+
+Executing classification for Model : Extra Trees
+
+
+Executing classification for Model : Logistic Regression
+
+
+Executing classification for Model : Support Vector Machine
+
+
+Resultaten voor model zonder hyperparameter tuning
+**********************************************
+voor models : dict_keys(['Random Forest', 'Ada Boost', 'Gradient Boosting', 'Extra Trees', 'Logistic Regression', 'Support Vector Machine'])
+
+
+
+Resultaten voor model Random Forest
+**********************************************
+Score: [48.980000000000004]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.29      0.00      0.01      2014
+         Low       0.50      0.95      0.65      5005
+    Moderate       0.30      0.05      0.08      2981
+
+    accuracy                           0.49     10000
+   macro avg       0.36      0.33      0.25     10000
+weighted avg       0.40      0.49      0.35     10000
+
+Confusion matrix: [[   8 1921   85]
+ [  12 4747  246]
+ [   8 2830  143]]
+
+
+
+
+
+Resultaten voor model Ada Boost
+**********************************************
+Score: [50.09]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.00      0.00      0.00      2014
+         Low       0.50      1.00      0.67      5005
+    Moderate       0.64      0.00      0.00      2981
+
+    accuracy                           0.50     10000
+   macro avg       0.38      0.33      0.22     10000
+weighted avg       0.44      0.50      0.34     10000
+
+Confusion matrix: [[   0 2013    1]
+ [   0 5002    3]
+ [   0 2974    7]]
+
+
+
+
+
+Resultaten voor model Gradient Boosting
+**********************************************
+Score: [49.980000000000004]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.25      0.00      0.00      2014
+         Low       0.50      1.00      0.67      5005
+    Moderate       0.29      0.00      0.01      2981
+
+    accuracy                           0.50     10000
+   macro avg       0.35      0.33      0.22     10000
+weighted avg       0.39      0.50      0.34     10000
+
+Confusion matrix: [[   1 2003   10]
+ [   2 4986   17]
+ [   1 2969   11]]
+
+
+
+
+
+Resultaten voor model Extra Trees
+**********************************************
+Score: [46.94]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.20      0.02      0.04      2014
+         Low       0.50      0.87      0.63      5005
+    Moderate       0.29      0.10      0.15      2981
+
+    accuracy                           0.47     10000
+   macro avg       0.33      0.33      0.28     10000
+weighted avg       0.38      0.47      0.37     10000
+
+Confusion matrix: [[  49 1759  206]
+ [ 124 4334  547]
+ [  67 2603  311]]
+
+
+
+
+
+Resultaten voor model Logistic Regression
+**********************************************
+Score: [32.629999999999995]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.21      0.36      0.26      2014
+         Low       0.49      0.30      0.37      5005
+    Moderate       0.30      0.34      0.32      2981
+
+    accuracy                           0.33     10000
+   macro avg       0.33      0.34      0.32     10000
+weighted avg       0.38      0.33      0.34     10000
+
+Confusion matrix: [[ 734  641  639]
+ [1777 1519 1709]
+ [1023  948 1010]]
+
+
+
+
+
+Resultaten voor model Support Vector Machine
+**********************************************
+Score: [50.05]
+Classification report:               precision    recall  f1-score   support
+
+        High       0.00      0.00      0.00      2014
+         Low       0.50      1.00      0.67      5005
+    Moderate       0.00      0.00      0.00      2981
+
+    accuracy                           0.50     10000
+   macro avg       0.17      0.33      0.22     10000
+weighted avg       0.25      0.50      0.33     10000
+
+Confusion matrix: [[   0 2014    0]
+ [   0 5005    0]
+ [   0 2981    0]]
+
+
+
+Executing execute_classification_models_with_pipeline_hyperparameter_tuning for model: Logistic Regression
+Executing execute_classification_models_with_pipeline_hyperparameter_tuning for model: Decision Tree
+Executing execute_classification_models_with_pipeline_hyperparameter_tuning for model: Gradient Boosting
+
+
+Resultaten voor model met hyperparameter tuning
+**********************************************
+voor models : dict_keys(['Logistic Regression', 'Decision Tree', 'Gradient Boosting'])
+
+Resultaat voor model Logistic Regression
+Parameter: test_score
+0.5085
+Parameter: conf_matrix
+[[   0 1987    0]
+ [   0 5083    0]
+ [   0 2928    2]]
+Parameter: class_report
+              precision    recall  f1-score   support
+
+        High       0.00      0.00      0.00      1987
+         Low       0.51      1.00      0.67      5083
+    Moderate       1.00      0.00      0.00      2930
+
+    accuracy                           0.51     10000
+   macro avg       0.50      0.33      0.23     10000
+weighted avg       0.55      0.51      0.34     10000
+
+
+
+Resultaat voor model Decision Tree
+Parameter: test_score
+0.4131
+Parameter: conf_matrix
+[[ 292 1201  494]
+ [ 832 3183 1068]
+ [ 473 1801  656]]
+Parameter: class_report
+              precision    recall  f1-score   support
+
+        High       0.18      0.15      0.16      1987
+         Low       0.51      0.63      0.56      5083
+    Moderate       0.30      0.22      0.25      2930
+
+    accuracy                           0.41     10000
+   macro avg       0.33      0.33      0.33     10000
+weighted avg       0.38      0.41      0.39     10000
+
+
+
+Resultaat voor model Gradient Boosting
+Parameter: test_score
+0.5065
+Parameter: conf_matrix
+[[   0 1977   10]
+ [   5 5042   36]
+ [   1 2906   23]]
+Parameter: class_report
+              precision    recall  f1-score   support
+
+        High       0.00      0.00      0.00      1987
+         Low       0.51      0.99      0.67      5083
+    Moderate       0.33      0.01      0.02      2930
+
+    accuracy                           0.51     10000
+   macro avg       0.28      0.33      0.23     10000
+weighted avg       0.36      0.51      0.35     10000
+
+
+
